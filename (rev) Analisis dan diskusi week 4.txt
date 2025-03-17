@@ -1,0 +1,71 @@
+Levis Mega Nureska(224308010)
+Analisis dan diskusi week4 
+
+Analisis : 
+1. Bagaimana Performa Agen dalam Mengontrol Environment CartPole? 
+Agen menggunakan Deep Q-Network (DQN) untuk belajar mengontrol lingkungan CartPole. Selama 
+pelatihan, agen pada awalnya mengambil tindakan secara acak karena nilai epsilon yang tinggi (1.0), 
+tetapi seiring waktu, ia mulai belajar dari pengalaman yang tersimpan dalam replay buffer. Model 
+diperbarui menggunakan Q-learning, dan eksplorasi berkurang secara bertahap dengan menurunnya 
+nilai epsilon (epsilon decay).Jika hanya menggunakan 30 episode, agen belum memiliki cukup 
+pengalaman untuk membuat keputusan yang optimal, sehingga performanya masih rendah dan 
+cenderung acak. Namun, dengan 1000 episode, agen memiliki lebih banyak kesempatan untuk 
+mengeksplorasi berbagai strategi, sehingga dapat mengoptimalkan kebijakan pengambilan keputusan 
+dan mencapai skor yang lebih tinggi secara konsisten. Dengan jumlah episode yang lebih banyak, 
+model menjadi lebih stabil, epsilon mendekati 0.01, dan agen lebih sering memilih tindakan terbaik 
+berdasarkan pengalaman yang telah dipelajari. 
+2. Bagaimana Perubahan Parameter Mempengaruhi Kinerja Agen? 
+Beberapa parameter penting yang mempengaruhi kinerja agen meliputi: 
+• Gamma (0.95) → Faktor diskonto, semakin tinggi nilainya, semakin fokus agen pada reward 
+jangka panjang. 
+• Epsilon (1.0 → 0.01, decay 0.995) → Laju eksplorasi, jika terlalu cepat turun, agen bisa terjebak 
+dalam lokal optima sebelum cukup mengeksplorasi tindakan yang lebih baik. 
+• Learning rate (0.001) → Jika terlalu besar, model bisa sulit untuk konvergen, sementara jika 
+terlalu kecil, model belajar terlalu lambat. 
+• Ukuran hidden layer (24, 24 neurons) → Struktur jaringan berpengaruh terhadap kemampuan 
+agen dalam mengekstraksi pola dari data. 
+• Batch size (64) → Jika terlalu kecil, pembelajaran bisa terlalu bervariasi (noisy); jika terlalu besar, 
+pembelajaran bisa lambat. 
+3. Apa Tantangan yang Muncul Selama Pelatihan Agen RL? 
+Beberapa tantangan yang sering dihadapi selama pelatihan agen RL pada environment CartPole 
+meliputi: 
+• Ketidakstabilan dalam Pembelajaran : Jika learning rate terlalu besar atau parameter tidak diatur 
+dengan baik, agen bisa gagal mencapai konvergensi. 
+• Eksplorasi vs. Eksploitasi : Jika ε-greedy policy tidak dikonfigurasi dengan baik, agen bisa 
+terjebak dalam strategi suboptimal karena eksploitasi terlalu dini atau eksplorasi yang tidak 
+cukup. 
+• Overfitting ke Lingkungan Latihan : Agen yang terlalu banyak berlatih dalam satu environment 
+mungkin kesulitan beradaptasi jika environment sedikit berubah. 
+• Efisiensi Sampel : DQN membutuhkan banyak episode untuk mencapai performa optimal, yang 
+memakan banyak waktu dan sumber daya komputasi. 
+Diskusi : 
+1. Apa Perbedaan Utama antara Reinforcement Learning dan Metode Supervised Learning 
+dalam Sistem Kendali? 
+Supervised Learning 
+• Memerlukan dataset berlabel yang telah tersedia sebelumnya. 
+• Model dilatih dengan mencocokkan input dengan output berdasarkan contoh yang diberikan. 
+• Digunakan untuk tugas prediktif seperti klasifikasi dan regresi. 
+• Contoh dalam sistem kendali: Memprediksi suhu menggunakan data sensor pada sistem HVAC. 
+Reinforcement Learning 
+• Tidak membutuhkan data berlabel, melainkan belajar melalui interaksi dengan lingkungan. 
+• Agen memperoleh reward sebagai umpan balik untuk menentukan strategi optimal. 
+• Cocok untuk pengambilan keputusan dalam lingkungan yang dinamis dan terus berubah. 
+• Contoh dalam sistem kendali: Mengendalikan robot agar tetap seimbang saat berjalan dengan 
+belajar dari pengalaman. 
+2. Bagaimana Strategi Eksplorasi (Exploration) dan Eksploitasi (Exploitation) Dapat 
+Dioptimalkan pada Agen RL? 
+Beberapa Metode untuk Mengoptimalkan Strategi Eksplorasi dan Eksploitasi 
+1. Upper Confidence Bound (UCB) – Memilih tindakan dengan mempertimbangkan 
+keseimbangan antara eksplorasi dan perkiraan reward yang diharapkan. 
+2. Boltzmann Exploration – Mengurangi eksplorasi yang sepenuhnya acak dengan lebih 
+memprioritaskan tindakan yang memiliki peluang reward lebih tinggi. 
+3. Intrinsic Motivation – Memberikan reward tambahan kepada agen untuk mendorong eksplorasi 
+hal baru, mirip dengan bagaimana manusia belajar melalui rasa ingin tahu. 
+3. Potensi Aplikasi RL dalam Sistem Kendali Nyata yang Dapat Diimplementasikan 
+Reinforcement Learning memiliki banyak aplikasi dalam sistem kendali di dunia nyata, termasuk: 
+1. Kendaraan Otonom 
+o RL digunakan dalam self-driving cars untuk pengambilan keputusan seperti navigasi, 
+penghindaran rintangan, dan manuver optimal. 
+2. Robotika Industri 
+o Digunakan dalam pengendalian lengan robot untuk tugas seperti perakitan otomatis dan 
+manipulasi objek dengan presisi tinggi.
